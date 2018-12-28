@@ -1,4 +1,4 @@
-# ProjectName
+# Faithlife.RunAnalyzers
 
 Description
 
@@ -6,11 +6,11 @@ Description
 
 Ubuntu | Windows | NuGet
 --- | --- | ---
-[![Travis CI](https://img.shields.io/travis/Faithlife/RepoName/master.svg)](https://travis-ci.org/Faithlife/RepoName) | [![AppVeyor](https://img.shields.io/appveyor/ci/Faithlife/reponame/master.svg)](https://ci.appveyor.com/project/Faithlife/reponame) | [![NuGet](https://img.shields.io/nuget/v/ProjectName.svg)](https://www.nuget.org/packages/ProjectName)
+[![Travis CI](https://img.shields.io/travis/Faithlife/RunAnalyzers/master.svg)](https://travis-ci.org/Faithlife/RunAnalyzers) | [![AppVeyor](https://img.shields.io/appveyor/ci/Faithlife/runanalyzers/master.svg)](https://ci.appveyor.com/project/Faithlife/runanalyzers) | [![NuGet](https://img.shields.io/nuget/v/Faithlife.RunAnalyzers.svg)](https://www.nuget.org/packages/Faithlife.RunAnalyzers)
 
 ## Documentation
 
-* https://faithlife.github.io/RepoName/
+* https://faithlife.github.io/RunAnalyzers/
 * License: [MIT](LICENSE)
 * [Version History](VersionHistory.md)
 * [Contributing Guidelines](CONTRIBUTING.md)

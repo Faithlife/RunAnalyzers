@@ -5,6 +5,9 @@
     <TargetFrameworks>netstandard1.4;netstandard2.0;net461</TargetFrameworks>
     <Description></Description>
     <PackageTags></PackageTags>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
