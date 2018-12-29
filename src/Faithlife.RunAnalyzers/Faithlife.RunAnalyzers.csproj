@@ -6,12 +6,31 @@
     <VersionPrefix>0.1.0</VersionPrefix>
     <PackageId>Faithlife.RunAnalyzers.Tool</PackageId>
     <LangVersion>latest</LangVersion>
+    <IsTool>true</IsTool>
+    <IncludeBuildOutput>true</IncludeBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CLAP" Version="4.6.0" />
-    <PackageReference Include="Microsoft.Build.Locator" Version="1.1.2" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.10.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="2.10.0" />
+    <PackageReference Include="CLAP" Version="4.6.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Build.Locator" Version="1.1.2">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.10.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="2.10.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
+
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);GetPackageDependencies</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+  <Target Name="GetPackageDependencies">
+    <ItemGroup>
+      <BuildOutputInPackage Include="$(OutputPath)*.dll" />
+    </ItemGroup>
+  </Target>
 </Project>
