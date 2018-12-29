@@ -48,49 +48,8 @@ Task("Rebuild")
 	.IsDependentOn("Clean")
 	.IsDependentOn("Build");
 
-Task("UpdateDocs")
-	.WithCriteria(!string.IsNullOrEmpty(buildBotPassword))
-	.WithCriteria(EnvironmentVariable("APPVEYOR_REPO_BRANCH") == "master")
-	.IsDependentOn("Build")
-	.Does(() =>
-	{
-		var branchName = "gh-pages";
-		var docsDirectory = new DirectoryPath(branchName);
-		GitClone(docsRepoUri, docsDirectory, new GitCloneSettings { BranchName = branchName });
-
-		Information($"Updating documentation at {docsDirectory}.");
-		foreach (var docsProject in docsProjects)
-		{
-			XmlDocMarkdownGenerate(File($"src/{docsProject}/bin/{configuration}/net461/{docsProject}.dll").ToString(), $"{docsDirectory}{System.IO.Path.DirectorySeparatorChar}",
-				new XmlDocMarkdownSettings { SourceCodePath = $"{docsSourceUri}/{docsProject}", NewLine = "\n", ShouldClean = true });
-		}
-
-		if (GitHasUncommitedChanges(docsDirectory))
-		{
-			Information("Committing all documentation changes.");
-			GitAddAll(docsDirectory);
-			GitCommit(docsDirectory, buildBotDisplayName, buildBotEmail, "Automatic documentation update.");
-			Information("Pushing updated documentation to GitHub.");
-			GitPush(docsDirectory, buildBotUserName, buildBotPassword, branchName);
-		}
-		else
-		{
-			Information("No documentation changes detected.");
-		}
-	});
-
-Task("Test")
-	.IsDependentOn("Build")
-	.Does(() =>
-	{
-		foreach (var projectPath in GetFiles("tests/**/*.csproj").Select(x => x.FullPath))
-			DotNetCoreTest(projectPath, new DotNetCoreTestSettings { Configuration = configuration, NoBuild = true, NoRestore = true });
-	});
-
 Task("NuGetPackage")
 	.IsDependentOn("Rebuild")
-	.IsDependentOn("Test")
-	.IsDependentOn("UpdateDocs")
 	.Does(() =>
 	{
 		if (string.IsNullOrEmpty(versionSuffix) && !string.IsNullOrEmpty(trigger))
@@ -140,6 +99,6 @@ Task("NuGetPublish")
 	});
 
 Task("Default")
-	.IsDependentOn("Test");
+	.IsDependentOn("Build");
 
 RunTarget(target);
