@@ -41,12 +41,7 @@ Task("Build")
 	.IsDependentOn("Restore")
 	.Does(() =>
 	{
-		DotNetBuild(
-			solutionFileName,
-			settings => settings
-				.SetConfiguration(configuration)
-				.SetVerbosity(Cake.Core.Diagnostics.Verbosity.Normal)
-				.WithTarget("Build"));
+		DotNetCoreBuild(solutionFileName, new DotNetCoreBuildSettings { Configuration = configuration, NoRestore = true, ArgumentCustomization = args => args.Append("--verbosity normal") });
 	});
 
 Task("Rebuild")
