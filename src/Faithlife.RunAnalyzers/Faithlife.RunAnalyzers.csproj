@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net472</TargetFrameworks>
-    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionPrefix>0.1.1</VersionPrefix>
     <PackageId>Faithlife.RunAnalyzers.Tool</PackageId>
     <LangVersion>latest</LangVersion>
     <IsTool>true</IsTool>
